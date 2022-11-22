@@ -5,10 +5,11 @@
  */
 
 #include "fonctions.h"
+#include<string.h>
 using namespace std;
 
 // fichier de dictionnaire en string
-string dico_fr = "dictionnaire_francais.txt";
+string dico_fr = "liste_francais.txt";
 string dico_en = "dictionnaire_anglais.txt";
 
 
@@ -18,9 +19,14 @@ int main() {
     srand (time(NULL));
 
     // Déclaration des variables
-    int choixLangue;
+    int choixLangue=-1;
     int tailleDico;
-    int NbrAleatoire = rand() % tailleDico;
+    int nbrAleatoire = rand() % tailleDico;
+
+    const int essaieRestant= 6;
+
+    using dico = vector<string> ;
+    dico dictionnaire;
 
 
     // Choix de la langue
@@ -36,33 +42,29 @@ int main() {
     // ex auto it = find(vecteur.begin(), vecteur.end(), "mot");    vecteur = { "mot", "mot2", "mot3" }
     // ça nous renvoie un iterateur qui pointe sur le mot "mot" dans le vecteur
 
-
     if (choixLangue == 0){
         cout << "Vous avez choisi le français\n";
-        // lire le fichier dico_fr et le mettre dans un vecteur
-
-        using caracteres = vector<string> ;
-        using mot = vector<caracteres>;
-        mot dico;
-        lireFichier(dico_fr, );
-        tailleDico = dico.size();
-
-
+        lireFichier(dico_fr,dictionnaire);
     }
     else if (choixLangue == 1){
-
         cout << "You chose English\n";
-        // lire le fichier dico_en et le mettre dans un vecteur
-        using caracteres = vector<string> ;
-        using mot = vector<caracteres>;
-        mot dico2;
-        lireFichier(dico_en, dico2);
+        lireFichier(dico_en, dictionnaire);
     }
+    tailleDico = dictionnaire.size();
 
 
-    srand (time(NULL));
+    string motADeviner=dictionnaire[nbrAleatoire];
+    string choixUtilisateur="";
 
-    vector<string> MotADeviner;
+    do {
+        for (int i = essaieRestant; i > 0 ; --i) {
+            cout<<essaieRestant(i);
+        }
+
+
+    } while (choixUtilisateur!=motADeviner);
+
+
 
 
 

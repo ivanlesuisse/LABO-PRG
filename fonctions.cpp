@@ -5,14 +5,13 @@
 
 #include "fonctions.h"
 
-using namespace std;
 
 // Fonction qui permet de lire un fichier texte et de le mettre dans un vecteur
-void lireFichier(string nomFichier, vector<string> &vecteur)
+void lireFichier(std::string nomFichier, std::vector<std::string>& vecteur)
 
 {
-    ifstream fichier(nomFichier.c_str());
-    string mot;
+    std::ifstream fichier(nomFichier.c_str());
+    std::string mot;
     if (fichier)
     {
         while (fichier >> mot)
@@ -22,11 +21,12 @@ void lireFichier(string nomFichier, vector<string> &vecteur)
     }
     else
     {
-        cout << "Erreur lors de l'ouverture du fichier" << endl;
+        std::cout << "Erreur lors de l'ouverture du fichier" << std::endl;
     }
 }
+
 //Fonctionne qui affiche si une lettre est dans le mot
-bool estDansMot(char lettre, string mot)
+bool estDansMot(const char lettre,const std::string& mot)
 {
     for (int i = 0; i < mot.size(); i++)
     {
@@ -37,10 +37,18 @@ bool estDansMot(char lettre, string mot)
     }
     return false;
 }
-//Fonction qui permet de comparer deux mots et retourne l'indice des lettres qui sont identiques
-vector<int> comparerMots(string mot1, string mot2)
+
+/**
+ * Il prend deux chaînes et renvoie un vecteur d'entier représentant l'indice des lettres qui sont identiquess
+ *
+ * @param mot1 Le premier mot à comparer
+ * @param mot2 le deuxième mot à comparer
+ *
+ * @return Un vecteur d'entiers.
+ */
+std::vector<int> comparerMots(const std::string& mot1, const std::string& mot2)
 {
-    vector<int> indices;
+    std::vector<int> indices;
     for (int i = 0; i < mot1.size(); i++)
     {
         if (mot1[i] == mot2[i])
@@ -49,4 +57,20 @@ vector<int> comparerMots(string mot1, string mot2)
         }
     }
     return indices;
+}
+
+std::string essaieRestant(int nombreRestant){
+    std::string message="(";
+    switch (nombreRestant) {
+        case 0:
+            message+="no guesses";
+        case 1:
+            message+= "1 guess";
+        default:
+            message+=nombreRestant+" guesses";
+
+    }
+    message+=" left)";
+
+    return message;
 }
