@@ -69,8 +69,14 @@ int main() {
             cout << "Il vous reste " << essaiRestant << " essais\n";
             cout << "Quel est le mot ? "  << endl;
             cin >> choixUtilisateur;
+            //  ((((  contrôle du choix de l'utilisateur (suite de char de 5 de long, pas de nombre, pas de caractères spéciaux) )))) bellek
+
+            //controler si le mot est dans le dictionnaire si il l est faire : essaiRestant--; , sinon
+            // si le choix est "h" (help) on affiche le dico (possibilités restantes)
+            // sinon on affiche entree invalide et on recommence
 
 
+            // a mettre dans fonction comparerMots
                 for (int j = 0; j < motADeviner.size(); ++j) {
                     if( choixUtilisateur[j] == motADeviner[j]){
                         motIncomplet[j] = choixUtilisateur[j];
@@ -83,9 +89,14 @@ int main() {
                 cout << "mot provisoire : " motIncomplet << "   lettres trouvees: " << lettresTrouvees <<  endl;
 
                 cout << "Ce n'est pas le bon mot, essayez encore :) !\n";
+
+                //fonction qui trouve les possibilités restantes de mot et !!supprime!! les mots qui ne sont pas possibles et
+                // retourne le nombre de mots restants dans le dictionnaire
+
+
                 choixUtilisateur="";
 
-                essaiRestant--;
+
         }while(choixUtilisateur != motADeviner and essaiRestant > 0);
 
         if (choixUtilisateur == motADeviner){
