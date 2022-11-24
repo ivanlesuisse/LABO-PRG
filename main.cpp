@@ -25,7 +25,7 @@ int main() {
 
     const int essaiRestant= 6;
 
-    using dico = vector<string> ;
+    using dico = vector<string>;
     dico dictionnaire;
 
 
