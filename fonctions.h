@@ -11,8 +11,10 @@
 #ifndef WORDLE_FONCTIONS_H
 #define WORDLE_FONCTIONS_H
 
-void lireFichier(std::string nomFichier, std::vector<std::string>& vecteur);
+void regles();
 
-std::vector<int> comparerMots(const std::string& mot1, const std::string& mot2);
-std::string essaieRestant(int nombreRestant)
+void lireFichier(std::string nomFichier, std::vector<std::string> &vecteur);
+
+std::vector<int> comparerMots(std::string mot1, std::string mot2);
+
 #endif //WORDLE_FONCTIONS_H
