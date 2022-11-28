@@ -6,23 +6,29 @@
 #include "fonctions.h"
 
 
-// Fonction qui permet de lire un fichier texte et de le mettre dans un vecteur
-void lireFichier(std::string nomFichier, std::vector<std::string>& vecteur)
 
-{
-    std::ifstream fichier(nomFichier.c_str());
-    std::string mot;
-    if (fichier)
+
+/**
+ * Lit un fichier et place chaque ligne du fichier dans un vecteur
+ *
+ * @param nomFichier le nom du fichier à lire
+ * @param vecteur le vecteur qui contiendra les lignes du fichier
+ */
+void lireFichier(std::string nomFichier, std::vector<std::string>& vecteur){
+
+    std::string line;
+
+    std::ifstream fichier (nomFichier);
+
+    if(fichier.is_open())
     {
-        while (fichier >> mot)
-        {
-            vecteur.push_back(mot);
+        while (fichier) {
+            std::getline(fichier, line);
+            vecteur.push_back(line);
         }
-    }
-    else
-    {
-        std::cout << "Erreur lors de l'ouverture du fichier" << std::endl;
-    }
+        fichier.close();
+
+    }else std::cout<<"Error lors de l'ouverture du fichier"<<std::endl;
 }
 
 //Fonctionne qui affiche si une lettre est dans le mot
