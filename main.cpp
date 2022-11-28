@@ -9,8 +9,8 @@
 using namespace std;
 
 // fichier de dictionnaire en string
-string dico_fr = "liste_francais.txt";
-string dico_en = "dictionnaire_anglais.txt";
+string dico_fr = "../dictionnaire_francais.txt";
+string dico_en = "../dictionnaire_anglais.txt";
 
 bool estDansMot(char &i, string basicString);
 
@@ -19,11 +19,9 @@ int main() {
 
     // Déclaration des variables
     int choixLangue=-1;
-    int tailleDico;
-    int nbrAleatoire = rand() % tailleDico;
     string lettresTrouvees=" ";
 
-    const int essaiRestant= 6;
+    const int nombreEssaies= 6;
 
     using dico = vector<string>;
     dico dictionnaire;
@@ -31,12 +29,13 @@ int main() {
 
     // Choix de la langue
     do {
-        cout << "Bienvenue dans le jeu Wordle  !\n\n"
+        cout << "Play wordle !\n"
+             <<"Which language do you want to play ?\n"
              << "0. Jouer en francais\n"
              << "1. Play in English (hard)\n"
              << "2. Regles / Rules \n";
         cin >> choixLangue;
-    }while((choixLangue != 0) and (choixLangue != 1));
+    }while((choixLangue != 0) and (choixLangue != 1) and (choixLangue != 2));
 
     // à utiliser:      iterator find(first,last,val);   ceci nous renvoie un iterateur
     // ex auto it = find(vecteur.begin(), vecteur.end(), "mot");    vecteur = { "mot", "mot2", "mot3" }
@@ -44,51 +43,42 @@ int main() {
 
     // Lecture du fichier de dictionnaire
     if (choixLangue == 0){
-        cout << "Vous avez choisi le francais\n";
-        //lireFichier(dico_fr,dictionnaire);
+        lireFichier(dico_fr,dictionnaire);
+        cout<<"You have 6 guesses."<<endl;
     }
     else if (choixLangue == 1){
-        cout << "You chose English\n";
-       // lireFichier(dico_en, dictionnaire);
+       lireFichier(dico_en, dictionnaire);
+        cout<<"You have "<<nombreEssaies<<" guesses to find 1 in "<<dictionnaire.size()<<" words."<<endl;
     }else{
        regles();
     }
 
-    tailleDico = dictionnaire.size();
 
     // Choix du mot aléatoire
+    int nbrAleatoire = rand() % dictionnaire.size();
     string motADeviner=dictionnaire[nbrAleatoire];
-    string choixUtilisateur="";
-
-    cout << "à vos marques, prêt, devinez le mot  !\n\n";
 
     // Comparaison des mots
+    string choixUtilisateur="";
     string motIncomplet = "-----";
 
-    do{
-            cout << "Il vous reste " << essaiRestant << " essais\n";
-            cout << "Quel est le mot ? "  << endl;
-            cin >> choixUtilisateur;
-            //  ((((  contrôle du choix de l'utilisateur (suite de char de 5 de long, pas de nombre, pas de caractères spéciaux) )))) bellek
+    //
 
+    do{
+//       cout<< essaiRestant(nombreEssaies)<<endl;
+    cin >> choixUtilisateur;
+            //  ((((  contrôle du choix de l'utilisateur (suite de char de 5 de long, pas de nombre, pas de caractères spéciaux) )))) bellek
+        if (estDansDico){
+
+
+        } else if (choixUtilisateur=="h"){
+
+        }else{
+
+            }
             //controler si le mot est dans le dictionnaire si il l est faire : essaiRestant--; , sinon
             // si le choix est "h" (help) on affiche le dico (possibilités restantes)
             // sinon on affiche entree invalide et on recommence
-
-
-            // a mettre dans fonction comparerMots
-                for (int j = 0; j < motADeviner.size(); ++j) {
-                    if( choixUtilisateur[j] == motADeviner[j]){
-                        motIncomplet[j] = choixUtilisateur[j];
-
-                    }else if(estDansMot( choixUtilisateur[j], motADeviner) ){
-                        lettresTrouvees.push_back(j);
-                    }
-
-                }
-                cout << "mot provisoire : " motIncomplet << "   lettres trouvees: " << lettresTrouvees <<  endl;
-
-                cout << "Ce n'est pas le bon mot, essayez encore :) !\n";
 
                 //fonction qui trouve les possibilités restantes de mot et !!supprime!! les mots qui ne sont pas possibles et
                 // retourne le nombre de mots restants dans le dictionnaire
@@ -96,8 +86,7 @@ int main() {
 
                 choixUtilisateur="";
 
-
-        }while(choixUtilisateur != motADeviner and essaiRestant > 0);
+        }while(choixUtilisateur != motADeviner and nombreEssaies > 0);
 
         if (choixUtilisateur == motADeviner){
             cout << "Bravo, vous avez gagne !\n";
