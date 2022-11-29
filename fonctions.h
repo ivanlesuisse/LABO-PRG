@@ -13,7 +13,7 @@
 
 void regles();
 
-void lireFichier(std::string nomFichier, std::vector<std::string> &vecteur);
+void lireFichier(const std::string& nomFichier, std::vector<std::string>& vecteur);
 
 std::vector<int> comparerMots(std::string mot1, std::string mot2);
 std::string essaiRestant(int nombreRestant);

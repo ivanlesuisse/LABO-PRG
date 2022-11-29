@@ -14,7 +14,7 @@
  * @param nomFichier le nom du fichier à lire
  * @param vecteur le vecteur qui contiendra les lignes du fichier
  */
-void lireFichier(std::string nomFichier, std::vector<std::string>& vecteur){
+void lireFichier(const std::string& nomFichier, std::vector<std::string>& vecteur){
 
     std::string line;
 

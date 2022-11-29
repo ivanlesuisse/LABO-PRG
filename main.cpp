@@ -96,14 +96,5 @@ int main() {
             cout << "Vous avez perdu, le mot etait : " << motADeviner << endl;
         }
 
-
-
-
-
-
-
-
-
-
     return 0;
 }
