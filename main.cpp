@@ -80,14 +80,16 @@ int main() {
 
             charTrouvee(choixUtilisateur,motADeviner,motIncomplet);
 
+            //MettreAjour dico
+            //dicoCourant==miseAjourDico();
             if (choixUtilisateur == motADeviner)
             {
-                cout << "Bravo, vous avez gagne !\n";
+                cout << motIncomplet <<" Bravo, vous avez gagne !\n";
                 return 0;
             }
 
             cout<<motIncomplet<<" "<<essaiRestant(nombreEssaies)<<endl;
-
+            motIncomplet = "-----";
         } else if (choixUtilisateur=="h" and choixLangue==1){
             cin.clear();
             cin.ignore(numeric_limits<long double>::max(), '\n');

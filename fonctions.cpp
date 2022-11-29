@@ -144,18 +144,37 @@ void afficheMotRestant(std::vector<std::string>dicoCourant){
 
 }
 
+/**
+ * Il prend un mot, un mot à trouver et une chaîne, et il met à jour la chaîne avec les lettres du mot à trouver qui sont
+ * dans le mot
+ *
+ * @param mot le mot à trouver
+ * @param motAtrouver le mot à trouver
+ * @param chaineActuelle la chaîne qui sera affichée à l'utilisateur.
+ */
 void charTrouvee(const std::string& mot, const std::string& motAtrouver,std::string& chaineActuelle){
 
     for (int i = 0; i < mot.size() ; ++i) {
         if(islower(mot[i]) or reinterpret_cast<const char *>(mot[i]) == "-"){
-
             if (mot[i]==motAtrouver[i]) chaineActuelle[i]=toupper(motAtrouver[i]);
 
-            else if (estDansMot(mot[i],motAtrouver)){
-                chaineActuelle[i]=motAtrouver[i];
-            }
+            else if (estDansMot(mot[i],motAtrouver))
+                for (int j = 0; j < combienDeFoisDansMot(mot[i],motAtrouver); ++j) {
+                    chaineActuelle[j]=mot[i];
+                }
+
         }
-
     }
+}
 
+std::vector<std::string> miseAjourDico(){
+
+}
+
+int combienDeFoisDansMot(const char lettre,const std::string& mot){
+    int compteur=0;
+    for (int i = 0; i < mot.size() ; ++i) {
+        if (lettre == mot[i]) ++compteur;
+    }
+    return compteur;
 }

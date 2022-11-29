@@ -26,4 +26,6 @@ bool estDansDico(const std::string& mot,std::vector<std::string> dico);
 void afficheMotRestant(std::vector<std::string>dicoCourant);
 
 void charTrouvee(const std::string& mot, const std::string& motAtrouver,std::string& chaineActuelle);
+
+int combienDeFoisDansMot(const char lettre,const std::string& mot);
 #endif //WORDLE_FONCTIONS_H
