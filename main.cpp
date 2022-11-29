@@ -73,9 +73,12 @@ int main() {
     cin >> choixUtilisateur;
 
         if (estDansDico(choixUtilisateur,dictionnaire)){
-
             --nombreEssaies;
-
+            cout<<renvoieCharTrouvee(choixUtilisateur,motADeviner,motIncomplet)<<" "<<essaiRestant(nombreEssaies);
+        if (choixUtilisateur == motADeviner){
+            cout << "Bravo, vous avez gagne !\n";
+            return 0;
+        }
         } else if (choixUtilisateur=="h" and choixLangue==2){
 
         //savoir combien de mots sont encore possible et en lui en donnant
@@ -90,11 +93,9 @@ int main() {
 
         }while(choixUtilisateur != motADeviner and nombreEssaies > 0);
 
-        if (choixUtilisateur == motADeviner){
-            cout << "Bravo, vous avez gagne !\n";
-        }else{
-            cout << "Vous avez perdu, le mot etait : " << motADeviner << endl;
-        }
+
+    cout << "Vous avez perdu, le mot etait : " << motADeviner << endl;
+
 
     return 0;
 }

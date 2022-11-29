@@ -15,10 +15,15 @@ void regles();
 
 void lireFichier(const std::string& nomFichier, std::vector<std::string>& vecteur);
 
-std::vector<int> comparerMots(std::string mot1, std::string mot2);
+std::vector<std::string> comparerMots(std::string mot1, std::string mot2);
+
 std::string essaiRestant(int nombreRestant);
+
+bool estDansMot(const char lettre,const std::string& mot);
 
 bool estDansDico(const std::string& mot,std::vector<std::string> dico);
 
 void afficheMotRestant(std::vector<std::string>dicoCourant);
+
+std::string renvoieCharTrouvee(const std::string& mot, const std::string& motAtrouver,std::string& chaineActuelle);
 #endif //WORDLE_FONCTIONS_H

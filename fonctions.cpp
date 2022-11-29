@@ -143,3 +143,7 @@ void afficheMotRestant(std::vector<std::string>dicoCourant){
     std::cout<<std::endl;
 
 }
+
+std::string renvoieCharTrouvee(const std::string& mot, const std::string& motAtrouver,std::string& chaineActuelle){
+
+}
