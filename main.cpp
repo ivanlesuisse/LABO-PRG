@@ -13,6 +13,7 @@ using namespace std;
 // fichier de dictionnaire en string
 string dico_fr = "../dictionnaire_francais.txt";
 string dico_en = "../dictionnaire_anglais.txt";
+const string MESSAGE_ERREUR="The input isn't in the dictionary !";
 
 
 
@@ -47,6 +48,7 @@ int main() {
     if (choixLangue == 0){
         lireFichier(dico_fr,dictionnaire);
         cout<<"You have 6 guesses."<<endl;
+
     }
     else if (choixLangue == 1){
        lireFichier(dico_en, dictionnaire);
@@ -73,18 +75,26 @@ int main() {
     cin >> choixUtilisateur;
 
         if (estDansDico(choixUtilisateur,dictionnaire)){
-            --nombreEssaies;
-            cout<<renvoieCharTrouvee(choixUtilisateur,motADeviner,motIncomplet)<<" "<<essaiRestant(nombreEssaies);
-        if (choixUtilisateur == motADeviner){
-            cout << "Bravo, vous avez gagne !\n";
-            return 0;
-        }
-        } else if (choixUtilisateur=="h" and choixLangue==2){
 
-        //savoir combien de mots sont encore possible et en lui en donnant
-        afficheMotRestant(dicoCourant);
+            --nombreEssaies;
+
+            motIncomplet=renvoieCharTrouvee(choixUtilisateur,motADeviner,motIncomplet);
+
+            if (choixUtilisateur == motADeviner)
+            {
+                cout << "Bravo, vous avez gagne !\n";
+                return 0;
+            }
+
+            cout<<motIncomplet<<" "<<essaiRestant(nombreEssaies);
+
+        } else if (choixUtilisateur=="h" and choixLangue==1){
+            cin.clear();
+            cin.ignore(numeric_limits<long double>::max(), '\n');
+            afficheMotRestant(dicoCourant);
 
         }else{
+            cout<<MESSAGE_ERREUR<<endl;
             cin.clear();
             cin.ignore(numeric_limits<long double>::max(), '\n');
             }
