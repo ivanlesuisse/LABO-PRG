@@ -144,6 +144,18 @@ void afficheMotRestant(std::vector<std::string>dicoCourant){
 
 }
 
-std::string renvoieCharTrouvee(const std::string& mot, const std::string& motAtrouver,std::string& chaineActuelle){
+void charTrouvee(const std::string& mot, const std::string& motAtrouver,std::string& chaineActuelle){
+
+    for (int i = 0; i < mot.size() ; ++i) {
+        if(islower(mot[i]) or reinterpret_cast<const char *>(mot[i]) == "-"){
+
+            if (mot[i]==motAtrouver[i]) chaineActuelle[i]=toupper(motAtrouver[i]);
+
+            else if (estDansMot(mot[i],motAtrouver)){
+                chaineActuelle[i]=motAtrouver[i];
+            }
+        }
+
+    }
 
 }

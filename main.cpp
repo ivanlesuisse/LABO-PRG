@@ -78,7 +78,7 @@ int main() {
 
             --nombreEssaies;
 
-            motIncomplet=renvoieCharTrouvee(choixUtilisateur,motADeviner,motIncomplet);
+            charTrouvee(choixUtilisateur,motADeviner,motIncomplet);
 
             if (choixUtilisateur == motADeviner)
             {
@@ -86,7 +86,7 @@ int main() {
                 return 0;
             }
 
-            cout<<motIncomplet<<" "<<essaiRestant(nombreEssaies);
+            cout<<motIncomplet<<" "<<essaiRestant(nombreEssaies)<<endl;
 
         } else if (choixUtilisateur=="h" and choixLangue==1){
             cin.clear();
