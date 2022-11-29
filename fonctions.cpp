@@ -114,6 +114,32 @@ std::string essaiRestant(const int nombreRestant){
 
     }
 
-bool estDansDico(const std::string& mot){
+/**
+ * Elle renvoie true si la chaîne mot est dans le vecteur dico, et false sinon
+ *
+ * @param mot le mot à vérifier
+ * @param dico le dictionnaire des mots
+ *
+ * @return Un booléen
+ */
+bool estDansDico(const std::string& mot,std::vector<std::string> dico){
+
+    for (int i = 0; i < dico.size(); ++i) {
+        if (dico[i]==mot) return true;
+    }
+    return false;
+}
+
+/**
+ * Il imprime les mots restants dans le dictionnaire
+ *
+ * @param dicoCourant le dictionnaire actuel des mots
+ */
+void afficheMotRestant(std::vector<std::string>dicoCourant){
+
+    for (int i = 0; i < dicoCourant.size(); ++i) {
+        std::cout<<dicoCourant[i]<<" ";
+    }
+    std::cout<<std::endl;
 
 }

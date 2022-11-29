@@ -18,4 +18,7 @@ void lireFichier(std::string nomFichier, std::vector<std::string> &vecteur);
 std::vector<int> comparerMots(std::string mot1, std::string mot2);
 std::string essaiRestant(int nombreRestant);
 
+bool estDansDico(const std::string& mot,std::vector<std::string> dico);
+
+void afficheMotRestant(std::vector<std::string>dicoCourant);
 #endif //WORDLE_FONCTIONS_H

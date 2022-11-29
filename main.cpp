@@ -6,13 +6,15 @@
 
 #include "fonctions.h"
 #include<string.h>
+#include <limits>
+
 using namespace std;
 
 // fichier de dictionnaire en string
 string dico_fr = "../dictionnaire_francais.txt";
 string dico_en = "../dictionnaire_anglais.txt";
 
-bool estDansMot(char &i, string basicString);
+
 
 int main() {
     srand (time(NULL));
@@ -21,7 +23,7 @@ int main() {
     int choixLangue=-1;
     string lettresTrouvees=" ";
 
-    const int nombreEssaies= 6;
+    int nombreEssaies= 6;
 
     using dico = vector<string>;
     dico dictionnaire;
@@ -62,29 +64,29 @@ int main() {
     string choixUtilisateur="";
     string motIncomplet = "-----";
 
+    //Initialiser le dictionnaire courant
+    vector<string> dicoCourant=dictionnaire;
+
     //
 
     do{
-//       cout<< essaiRestant(nombreEssaies)<<endl;
     cin >> choixUtilisateur;
-            //  ((((  contrôle du choix de l'utilisateur (suite de char de 5 de long, pas de nombre, pas de caractères spéciaux) )))) bellek
-        if (estDansDico){
 
+        if (estDansDico(choixUtilisateur,dictionnaire)){
 
-        } else if (choixUtilisateur=="h"){
+            --nombreEssaies;
+
+        } else if (choixUtilisateur=="h" and choixLangue==2){
+
+        //savoir combien de mots sont encore possible et en lui en donnant
+        afficheMotRestant(dicoCourant);
 
         }else{
-
+            cin.clear();
+            cin.ignore(numeric_limits<long double>::max(), '\n');
             }
-            //controler si le mot est dans le dictionnaire si il l est faire : essaiRestant--; , sinon
-            // si le choix est "h" (help) on affiche le dico (possibilités restantes)
-            // sinon on affiche entree invalide et on recommence
 
-                //fonction qui trouve les possibilités restantes de mot et !!supprime!! les mots qui ne sont pas possibles et
-                // retourne le nombre de mots restants dans le dictionnaire
-
-
-                choixUtilisateur="";
+        choixUtilisateur="";
 
         }while(choixUtilisateur != motADeviner and nombreEssaies > 0);
 
