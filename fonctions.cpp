@@ -2,11 +2,7 @@
 // Created by ivbab on 17.11.2022.
 //
 
-
 #include "fonctions.h"
-
-
-
 
 /**
  * Lit un fichier et place chaque ligne du fichier dans un vecteur
@@ -31,7 +27,7 @@ void lireFichier(const std::string& nomFichier, std::vector<std::string>& vecteu
     }else std::cout<<"Error lors de l'ouverture du fichier"<<std::endl;
 }
 
-//Fonctionne qui affiche si une lettre est dans le mot
+
 bool estDansMot(const char lettre,const std::string& mot)
 {
     for (int i = 0; i < mot.size(); i++)
@@ -44,40 +40,8 @@ bool estDansMot(const char lettre,const std::string& mot)
     return false;
 }
 
-/**
- * Il prend deux chaînes et renvoie un vecteur d'entier représentant l'indice des lettres qui sont identiquess
- *
- * @param mot1 Le premier mot à comparer
- * @param mot2 le deuxième mot à comparer
- *
- * @return Un vecteur d'entiers.
- */
-std::vector<int> comparerMots(const std::string& mot1, const std::string& mot2)
-{
-    /*
-     *
-     * // a mettre dans fonction comparerMots
-                for (int j = 0; j < motADeviner.size(); ++j) {
-                    if( choixUtilisateur[j] == motADeviner[j]){
-                        motIncomplet[j] = choixUtilisateur[j];
 
-                    }else if(estDansMot( choixUtilisateur[j], motADeviner) ){
-                        lettresTrouvees.push_back(j);
-                    }
-
-                }
-     */
-    std::vector<int> indices;
-    for (int i = 0; i < mot1.size(); i++)
-    {
-        if (mot1[i] == mot2[i])
-
-            indices.push_back(i);
-    }
-    return indices;
-}
-
-std::string essaiRestant(const int nombreRestant){
+std::string essaiRestant(int nombreRestant,int choixLangue,int nombreMotRestants){
     std::string message="(";
     switch (nombreRestant) {
         case 0:
@@ -88,7 +52,8 @@ std::string essaiRestant(const int nombreRestant){
             message+=std::to_string(nombreRestant)+" guesses";
 
     }
-
+    if (choixLangue==2) message+=" for"+ std::to_string(nombreRestant)+" word";
+    if (nombreRestant>1) message+="s";
     message+=" left)";
 
     return message;

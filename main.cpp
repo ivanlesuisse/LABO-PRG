@@ -35,7 +35,7 @@ int main() {
 
     if (choixLangue == 0) {
         lireFichier(dico_fr, dictionnaire);
-        cout << "You have 6 guesses." << endl;
+        cout << "You have "<<nombreEssaies<<" guesses." << endl;
 
     } else if (choixLangue == 1) {
         lireFichier(dico_en, dictionnaire);
@@ -84,7 +84,7 @@ int main() {
                 return 0;
             }
 
-            cout << motIncomplet << " " << essaiRestant(nombreEssaies) << endl;
+            cout << motIncomplet << " " << essaiRestant(nombreEssaies,choixLangue,nombreEssaies) << endl;
             motIncomplet = "-----";
 
         /* Ceci est un code de triche. Il permet à l'utilisateur de voir la liste des mots encore possibles. */
