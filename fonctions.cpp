@@ -2,6 +2,7 @@
 // Created by ivbab on 17.11.2022.
 //
 
+#include <limits>
 #include "fonctions.h"
 
 /**
@@ -52,7 +53,7 @@ std::string essaiRestant(int nombreRestant,int choixLangue,int nombreMotRestants
             message+=std::to_string(nombreRestant)+" guesses";
 
     }
-    if (choixLangue==2) message+=" for"+ std::to_string(nombreRestant)+" word";
+    if (choixLangue==1) message+=" for "+ std::to_string(nombreMotRestants)+" word";
     if (nombreRestant>1) message+="s";
     message+=" left)";
 
@@ -135,14 +136,32 @@ void charTrouvee(const std::string& mot, const std::string& motAtrouver,std::str
     }
 }
 
-std::vector<std::string> miseAjourDico(const std::vector<std::string>& listeMotRestants,const std::string& reponseJoueur,const std::string& motIncomplet){
 
+
+
+std::vector<std::string> miseAjourDico(const std::vector<std::string>& listeMotRestants,const std::string& reponseJoueur,const std::string& motIncomplet){
+    std::vector<std::string> nouveauDico;
+
+    for (int i = 0; i <listeMotRestants.size() ; ++i) {
+        for (int j = 0; j < 5 ; ++j) {
+        if (std::isupper(motIncomplet[j])){
+            nouveauDico.push_back(listeMotRestants[i]);
+        }else if (std::islower(motIncomplet[j])){
+
+        } else{
+
+        }
+
+    }}
+    return nouveauDico;
 }
 
-int combienDeFoisDansMot(const char lettre,const std::string& mot){
-    int compteur=0;
-    for (int i = 0; i < mot.size() ; ++i) {
-        if (lettre == mot[i]) ++compteur;
-    }
-    return compteur;
+bool isInRange(int nb, int min, int max) {
+
+    if (nb < min or nb > max or !std::isdigit(nb)) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<long>::max(), '\n');
+        return false;
+
+    } else return true;
 }

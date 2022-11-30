@@ -25,8 +25,7 @@ void afficheListe(std::vector<std::string>dicoCourant);
 
 void charTrouvee(const std::string& mot, const std::string& motAtrouver,std::string& chaineActuelle);
 
-int combienDeFoisDansMot(const char lettre,const std::string& mot);
-
 std::vector<std::string> miseAjourDico(const std::vector<std::string>& listeMotRestants,const std::string& reponseJoueur,const std::string& motIncomplet);
 
+bool isInRange(int nb, int min, int max);
 #endif //WORDLE_FONCTIONS_H

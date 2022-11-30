@@ -18,7 +18,7 @@ const string MESSAGE_ERREUR = "The input isn't in the dictionary !";
 
 int main() {
 
-    int choixLangue = -1;
+    int choixLangue ;
     int nombreEssaies = 6;
 
     do {
@@ -28,7 +28,7 @@ int main() {
              << "1. Play in English (hard)\n"
              << "2. Regles / Rules \n";
         cin >> choixLangue;
-    } while ((choixLangue != 0) and (choixLangue != 1) and (choixLangue != 2));
+    } while (!isInRange(choixLangue,0,2));
 
     using dico = vector<string>;
     dico dictionnaire;
@@ -53,9 +53,9 @@ int main() {
 
     int nbrAleatoire = distribution(generator);
 
-    string motADeviner = dictionnaire[nbrAleatoire];
+    //string motADeviner = dictionnaire[nbrAleatoire];
 
-    //string motADeviner="ronde";
+    string motADeviner="boofy";
 
 
     string choixUtilisateur;
@@ -84,7 +84,7 @@ int main() {
                 return 0;
             }
 
-            cout << motIncomplet << " " << essaiRestant(nombreEssaies,choixLangue,nombreEssaies) << endl;
+            cout << motIncomplet << " " << essaiRestant(nombreEssaies,choixLangue,dicoCourant.size()) << endl;
             motIncomplet = "-----";
 
         /* Ceci est un code de triche. Il permet à l'utilisateur de voir la liste des mots encore possibles. */
