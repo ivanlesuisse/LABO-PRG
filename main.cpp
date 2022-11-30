@@ -19,11 +19,7 @@ const string MESSAGE_ERREUR = "The input isn't in the dictionary !";
 int main() {
 
     int choixLangue = -1;
-    string lettresTrouvees = " ";
     int nombreEssaies = 6;
-    using dico = vector<string>;
-    dico dictionnaire;
-
 
     do {
         cout << "Play wordle !\n"
@@ -33,6 +29,9 @@ int main() {
              << "2. Regles / Rules \n";
         cin >> choixLangue;
     } while ((choixLangue != 0) and (choixLangue != 1) and (choixLangue != 2));
+
+    using dico = vector<string>;
+    dico dictionnaire;
 
     if (choixLangue == 0) {
         lireFichier(dico_fr, dictionnaire);
@@ -61,8 +60,6 @@ int main() {
 
     string choixUtilisateur;
     string motIncomplet = "-----";
-
-
     vector<string> dicoCourant = dictionnaire;
 
     do {
@@ -74,11 +71,14 @@ int main() {
 
             charTrouvee(choixUtilisateur, motADeviner, motIncomplet);
 
-            //MettreAjour dico
-            if (choixLangue == 2) {
+
+            /* Mise à jour du dictionnaire quand le jeu est en anglais. */
+            if (choixLangue == 1) {
                 dicoCourant = miseAjourDico(dicoCourant, choixUtilisateur, motIncomplet);
             }
 
+            /* Vérifier si l'utilisateur a deviné le mot correctement. Si c'est le cas, il imprime le mot et félicite
+            l'utilisateur. */
             if (choixUtilisateur == motADeviner) {
                 cout << motIncomplet << " - Congratulations !";
                 return 0;
@@ -86,6 +86,8 @@ int main() {
 
             cout << motIncomplet << " " << essaiRestant(nombreEssaies) << endl;
             motIncomplet = "-----";
+
+        /* Ceci est un code de triche. Il permet à l'utilisateur de voir la liste des mots encore possibles. */
         } else if (choixUtilisateur == "h" and choixLangue == 1) {
             cin.clear();
             cin.ignore(numeric_limits<long>::max(), '\n');
