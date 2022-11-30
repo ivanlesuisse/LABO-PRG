@@ -27,5 +27,5 @@ void charTrouvee(const std::string& mot, const std::string& motAtrouver,std::str
 
 std::vector<std::string> miseAjourDico(const std::vector<std::string>& listeMotRestants,const std::string& reponseJoueur,const std::string& motIncomplet);
 
-bool isInRange(int nb, int min, int max);
+int checkUserInput(const std::string& mQuestion, int min, int max);
 #endif //WORDLE_FONCTIONS_H

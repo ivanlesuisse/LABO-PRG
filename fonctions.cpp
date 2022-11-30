@@ -3,6 +3,8 @@
 //
 
 #include <limits>
+#include <algorithm>
+#include <string>
 #include "fonctions.h"
 
 /**
@@ -53,7 +55,7 @@ std::string essaiRestant(int nombreRestant,int choixLangue,int nombreMotRestants
             message+=std::to_string(nombreRestant)+" guesses";
 
     }
-    if (choixLangue==1) message+=" for "+ std::to_string(nombreMotRestants)+" word";
+     message+=" for "+ std::to_string(nombreMotRestants)+" word";
     if (nombreRestant>1) message+="s";
     message+=" left)";
 
@@ -143,25 +145,40 @@ std::vector<std::string> miseAjourDico(const std::vector<std::string>& listeMotR
     std::vector<std::string> nouveauDico;
 
     for (int i = 0; i <listeMotRestants.size() ; ++i) {
-        for (int j = 0; j < 5 ; ++j) {
-        if (std::isupper(motIncomplet[j])){
-            nouveauDico.push_back(listeMotRestants[i]);
-        }else if (std::islower(motIncomplet[j])){
+        for (int j = 0; j < motIncomplet.length(); ++j) {
+            // si maj enlever garder que celle qui sont a la meme poisition par la même chose
+            if (std::isupper(motIncomplet[j])){
+                nouveauDico.push_back(listeMotRestants[i]);
+            }
+            // si min enlever garder que celle qui contienne la laettre
+            else if (std::islower(motIncomplet[j]) and listeMotRestants[i].find_first_not_of(motIncomplet[j]) != std::string::npos){
+                nouveauDico.push_back(listeMotRestants[i]);
 
-        } else{
+            }
+            else if (listeMotRestants[i].find_first_of(reponseJoueur) == std::string::npos and motIncomplet[j]=='-'){
+                nouveauDico.push_back(listeMotRestants[i]);
+            }
 
         }
 
-    }}
+    }
+    sort( nouveauDico.begin(), nouveauDico.end() );
+    nouveauDico.erase( unique( nouveauDico.begin(), nouveauDico.end() ), nouveauDico.end() );
     return nouveauDico;
 }
 
-bool isInRange(int nb, int min, int max) {
+int checkUserInput(const std::string& mQuestion, int min, int max) {
 
-    if (nb < min or nb > max or !std::isdigit(nb)) {
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<long>::max(), '\n');
-        return false;
+    int userInput;
 
-    } else return true;
+    do {
+        std::cout << mQuestion;
+        std::cin >> userInput;
+
+        if (userInput < min or userInput > max ) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        }
+    } while (userInput < min or userInput > max);
+    return userInput;
 }

@@ -18,17 +18,11 @@ const string MESSAGE_ERREUR = "The input isn't in the dictionary !";
 
 int main() {
 
-    int choixLangue ;
+    int choixLangue;
     int nombreEssaies = 6;
+    const string QUESTON_UTILISATEUR="Play wordle !\n Which language do you want to play ?\n 0. Jouer en francais\n 1. Play in English (hard)\n 2. Regles / Rules \n";
 
-    do {
-        cout << "Play wordle !\n"
-             << "Which language do you want to play ?\n"
-             << "0. Jouer en francais\n"
-             << "1. Play in English (hard)\n"
-             << "2. Regles / Rules \n";
-        cin >> choixLangue;
-    } while (!isInRange(choixLangue,0,2));
+    choixLangue=checkUserInput(QUESTON_UTILISATEUR,0,2);
 
     using dico = vector<string>;
     dico dictionnaire;
