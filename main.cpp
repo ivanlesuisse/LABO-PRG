@@ -1,109 +1,105 @@
 /**
- * @description:  Ce programme est un jeu wordle qui permet de trouver des mots dans une grille de lettres
+ * @description: Ce programme est un jeu wordle qui permet de trouver des mots dans une grille de lettres
 
  *
  */
 
 #include "fonctions.h"
-#include<string.h>
 #include <limits>
+#include <random>
 
 using namespace std;
 
 // fichier de dictionnaire en string
 string dico_fr = "../dictionnaire_francais.txt";
 string dico_en = "../dictionnaire_anglais.txt";
-const string MESSAGE_ERREUR="The input isn't in the dictionary !";
-
+const string MESSAGE_ERREUR = "The input isn't in the dictionary !";
 
 
 int main() {
-    srand (time(NULL));
 
-    // Déclaration des variables
-    int choixLangue=-1;
-    string lettresTrouvees=" ";
-
-    int nombreEssaies= 6;
-
+    int choixLangue = -1;
+    string lettresTrouvees = " ";
+    int nombreEssaies = 6;
     using dico = vector<string>;
     dico dictionnaire;
 
 
-    // Choix de la langue
     do {
         cout << "Play wordle !\n"
-             <<"Which language do you want to play ?\n"
+             << "Which language do you want to play ?\n"
              << "0. Jouer en francais\n"
              << "1. Play in English (hard)\n"
              << "2. Regles / Rules \n";
         cin >> choixLangue;
-    }while((choixLangue != 0) and (choixLangue != 1) and (choixLangue != 2));
+    } while ((choixLangue != 0) and (choixLangue != 1) and (choixLangue != 2));
 
-    // à utiliser:      iterator find(first,last,val);   ceci nous renvoie un iterateur
-    // ex auto it = find(vecteur.begin(), vecteur.end(), "mot");    vecteur = { "mot", "mot2", "mot3" }
-    // ça nous renvoie un iterateur qui pointe sur le mot "mot" dans le vecteur
+    if (choixLangue == 0) {
+        lireFichier(dico_fr, dictionnaire);
+        cout << "You have 6 guesses." << endl;
 
-    // Lecture du fichier de dictionnaire
-    if (choixLangue == 0){
-        lireFichier(dico_fr,dictionnaire);
-        cout<<"You have 6 guesses."<<endl;
-
-    }
-    else if (choixLangue == 1){
-       lireFichier(dico_en, dictionnaire);
-        cout<<"You have "<<nombreEssaies<<" guesses to find 1 in "<<dictionnaire.size()<<" words."<<endl;
-    }else{
-       regles();
+    } else if (choixLangue == 1) {
+        lireFichier(dico_en, dictionnaire);
+        cout << "You have " << nombreEssaies << " guesses to find 1 in " << dictionnaire.size() << " words." << endl;
+    } else {
+        regles();
     }
 
 
-    // Choix du mot aléatoire
-    int nbrAleatoire = rand() % dictionnaire.size();
-    string motADeviner=dictionnaire[nbrAleatoire];
 
-    // Comparaison des mots
-    string choixUtilisateur="";
+    /* Génération d'un nombre aléatoire entre 1 et la taille du dictionnaire. */
+    std::default_random_engine generator;
+
+    std::uniform_int_distribution<int> distribution(1, dictionnaire.size());
+
+    int nbrAleatoire = distribution(generator);
+
+    string motADeviner = dictionnaire[nbrAleatoire];
+
+    //string motADeviner="ronde";
+
+
+    string choixUtilisateur;
     string motIncomplet = "-----";
 
-    //Initialiser le dictionnaire courant
-    vector<string> dicoCourant=dictionnaire;
 
-    //
+    vector<string> dicoCourant = dictionnaire;
 
-    do{
-    cin >> choixUtilisateur;
+    do {
+        cin >> choixUtilisateur;
 
-        if (estDansDico(choixUtilisateur,dictionnaire)){
+        if (estDansDico(choixUtilisateur, dictionnaire)) {
 
             --nombreEssaies;
 
-            charTrouvee(choixUtilisateur,motADeviner,motIncomplet);
+            charTrouvee(choixUtilisateur, motADeviner, motIncomplet);
 
             //MettreAjour dico
-            //dicoCourant==miseAjourDico();
-            if (choixUtilisateur == motADeviner)
-            {
-                cout << motIncomplet <<" Bravo, vous avez gagne !\n";
+            if (choixLangue == 2) {
+                dicoCourant = miseAjourDico(dicoCourant, choixUtilisateur, motIncomplet);
+            }
+
+            if (choixUtilisateur == motADeviner) {
+                cout << motIncomplet << " - Congratulations !";
                 return 0;
             }
 
-            cout<<motIncomplet<<" "<<essaiRestant(nombreEssaies)<<endl;
+            cout << motIncomplet << " " << essaiRestant(nombreEssaies) << endl;
             motIncomplet = "-----";
-        } else if (choixUtilisateur=="h" and choixLangue==1){
+        } else if (choixUtilisateur == "h" and choixLangue == 1) {
             cin.clear();
-            cin.ignore(numeric_limits<long double>::max(), '\n');
-            afficheMotRestant(dicoCourant);
+            cin.ignore(numeric_limits<long>::max(), '\n');
+            afficheListe(dicoCourant);
 
-        }else{
-            cout<<MESSAGE_ERREUR<<endl;
+        } else {
+            cout << MESSAGE_ERREUR << endl;
             cin.clear();
-            cin.ignore(numeric_limits<long double>::max(), '\n');
-            }
+            cin.ignore(numeric_limits<long>::max(), '\n');
+        }
 
-        choixUtilisateur="";
+        choixUtilisateur = "";
 
-        }while(choixUtilisateur != motADeviner and nombreEssaies > 0);
+    } while (choixUtilisateur != motADeviner and nombreEssaies > 0);
 
 
     cout << "Vous avez perdu, le mot etait : " << motADeviner << endl;

@@ -95,22 +95,22 @@ std::string essaiRestant(const int nombreRestant){
 }
 
     void regles() {
-        std::cout << "Regles du  jeu Wordle :\n\n"
-                  << "Le but du jeu est de trouver un mot dans une grille de lettres.\n"
-                  << "Le mot est choisi aléatoirement dans un dictionnaire.\n"
-                  << "Vous avez 6 essais pour trouver le mot.\n"
-                  << "Si vous trouvez une lettre qui est dans le mot et à la bonne place , elle sera affichée de cette forme : -e--- .\n"
-                  << "Si vous trouvez une lettre qui est dans le mot mais pas à la bonne place , elle sera affichée de cette forme : -----   lettres trouvées : e,a .\n"
-                  << "Si vous avez d'autres questions, appellez Elon Musk .\n"
+        std::cout   << "Regles du  jeu Wordle :\n\n"
+                    << "Le but du jeu est de trouver un mot dans une grille de lettres.\n"
+                    << "Le mot est choisi aléatoirement dans un dictionnaire.\n"
+                    << "Vous avez 6 essais pour trouver le mot.\n"
+                    << "Si vous trouvez une lettre qui est dans le mot et à la bonne place , elle sera affichée en majuscule à l'emplacement correcte.\n"
+                    << "Si vous trouvez une lettre qui est dans le mot mais pas à la bonne place , elle sera affichée en minuscule à l'emplacement courant .\n"
 
-                  << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\n"
-                  << "Rules of the game Wordle :\n\n"
-                << "The goal of the game is to find a word in a grid of letters.\n"
-                << "The word is chosen randomly from a dictionary.\n"
-                << "You have 6 attempts to find the word.\n"
-                << "If you find a letter that is in the word and in the right place, it will be displayed in this form: -e---.\n"
-                << "If you find a letter that is in the word but not in the right place, it will be displayed in this form: ----- letters found: e, a.\n"
-                << "If you have other questions, call Elon Musk.\n" << std::endl;
+
+                    << "- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\n"
+                    << "Rules of the game Wordle :\n\n"
+                    << "The goal of the game is to find a word in a grid of letters.\n"
+                    << "The word is chosen randomly from a dictionary.\n"
+                    << "You have 6 attempts to find the word.\n"
+                    << "If you find a letter that is in the word and in the right place, it will be displayed in uppercase at the correct place.\n"
+                    << "If you find a letter that is in the word but not in the right place, it will be displayed in lowercase at the current place.\n"
+                    << std::endl;
 
     }
 
@@ -135,7 +135,7 @@ bool estDansDico(const std::string& mot,std::vector<std::string> dico){
  *
  * @param dicoCourant le dictionnaire actuel des mots
  */
-void afficheMotRestant(std::vector<std::string>dicoCourant){
+void afficheListe(std::vector<std::string>dicoCourant){
 
     for (int i = 0; i < dicoCourant.size(); ++i) {
         std::cout<<dicoCourant[i]<<" ";
@@ -155,19 +155,22 @@ void afficheMotRestant(std::vector<std::string>dicoCourant){
 void charTrouvee(const std::string& mot, const std::string& motAtrouver,std::string& chaineActuelle){
 
     for (int i = 0; i < mot.size() ; ++i) {
+
+        // si lovercase ou tiret
         if(islower(mot[i]) or reinterpret_cast<const char *>(mot[i]) == "-"){
+
+            //si même lettre même emplacement, ajouter lettre en upprecase à l'emplacement
             if (mot[i]==motAtrouver[i]) chaineActuelle[i]=toupper(motAtrouver[i]);
 
+            //Si la lettre est dans le mot mais pas au même emplacement, lettre lowercase à l'emplacement
             else if (estDansMot(mot[i],motAtrouver))
-                for (int j = 0; j < combienDeFoisDansMot(mot[i],motAtrouver); ++j) {
-                    chaineActuelle[j]=mot[i];
-                }
+                    chaineActuelle[i]=mot[i];
 
         }
     }
 }
 
-std::vector<std::string> miseAjourDico(){
+std::vector<std::string> miseAjourDico(const std::vector<std::string>& listeMotRestants,const std::string& reponseJoueur,const std::string& motIncomplet){
 
 }
 
