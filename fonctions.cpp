@@ -157,6 +157,11 @@ std::vector<std::string> miseAjourDico(const std::vector<std::string>& listeMotR
             pos.push_back(k);
         }
     }
+    std::cout<<lettrePossible<<" ";
+    for (int i = 0; i < pos.size(); ++i) {
+        std::cout<<pos[i];
+    }
+
 
 
 
@@ -165,8 +170,9 @@ std::vector<std::string> miseAjourDico(const std::vector<std::string>& listeMotR
     if (listeMotRestants[i].find_first_of(lettreImpossible) == std::string::npos and
         listeMotRestants[i].find_first_of(lettrePossible) != std::string::npos
         ){
-        if (listeMotRestants[i][pos[k]] != motIncomplet[pos[k]]) nouveauDico.push_back(listeMotRestants[i]);
-
+        for (int k = 0; k < pos.size(); ++k) {
+            if (listeMotRestants[i][pos[k]] != motIncomplet[pos[k]]) nouveauDico.push_back(listeMotRestants[i]);
+        }
     }
         }
 
