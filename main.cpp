@@ -5,8 +5,7 @@
  */
 
 #include "fonctions.h"
-#include <limits>
-#include <random>
+
 
 using namespace std;
 
@@ -41,15 +40,15 @@ int main() {
 
 
     /* Génération d'un nombre aléatoire entre 1 et la taille du dictionnaire. */
-    std::default_random_engine generator;
+    default_random_engine generator;
 
-    std::uniform_int_distribution<int> distribution(1, dictionnaire.size());
+    uniform_int_distribution<int> distribution(1, dictionnaire.size());
 
     int nbrAleatoire = distribution(generator);
 
     //string motADeviner = dictionnaire[nbrAleatoire];
 
-    string motADeviner="dynes";
+    string motADeviner="essor";  // pour tester le programme
 
 
     string choixUtilisateur;
@@ -59,7 +58,7 @@ int main() {
     do {
         cin >> choixUtilisateur;
 
-        if (estDansDico(choixUtilisateur, dictionnaire)) {
+        if (estDansDico(choixUtilisateur, dictionnaire)) {e
 
             --nombreEssaies;
 

@@ -2,10 +2,6 @@
 // Created by ivbab on 17.11.2022.
 //
 
-#include <limits>
-#include <algorithm>
-#include <string>
-#include <vector>
 #include "fonctions.h"
 
 /**
@@ -47,14 +43,24 @@ bool estDansMot(const char lettre,const std::string& mot)
 
 std::string essaiRestant(int nombreRestant,int choixLangue,int nombreMotRestants){
     std::string message="(";
-    switch (nombreRestant) {
-        case 0:
-            message+="no guesses";
-        case 1:
-            message+= "1 guess";
-        default:
-            message+=std::to_string(nombreRestant)+" guesses";
-
+    if(choixLangue==0) {
+        switch (nombreRestant) {
+            case 0:
+                message += "0 essai restant";
+            case 1:
+                message += "1 essai restant";
+            default:
+                message += std::to_string(nombreRestant) + " essais restants";
+        }
+    }else if(choixLangue==1) {
+        switch (nombreRestant) {
+            case 0:
+                message += "no guesses";
+            case 1:
+                message += "1 guess";
+            default:
+                message += std::to_string(nombreRestant) + " guesses";
+        }
     }
      message+=" for "+ std::to_string(nombreMotRestants)+" word";
     if (nombreRestant>1) message+="s";
@@ -129,11 +135,17 @@ void charTrouvee(const std::string& mot, const std::string& motAtrouver,std::str
         if(islower(mot[i]) or reinterpret_cast<const char *>(mot[i]) == "-"){
 
             //si même lettre même emplacement, ajouter lettre en upprecase à l'emplacement
-            if (mot[i]==motAtrouver[i]) chaineActuelle[i]=toupper(motAtrouver[i]);
+            if (mot[i]==motAtrouver[i]) {
+                chaineActuelle[i] = toupper(motAtrouver[i]);
+                // enlever les possibilités du dictionnaire
 
+            }
             //Si la lettre est dans le mot mais pas au même emplacement, lettre lowercase à l'emplacement
             else if (estDansMot(mot[i],motAtrouver))
                     chaineActuelle[i]=mot[i];
+            // enlever les possibilités qui ont pas cette lettre
+
+
 
         }
     }
@@ -141,7 +153,7 @@ void charTrouvee(const std::string& mot, const std::string& motAtrouver,std::str
 
 
 
-
+// Fonction qui enlève les mots impossibles
 std::vector<std::string> miseAjourDico(const std::vector<std::string>& listeMotRestants,const std::string& reponseJoueur,const std::string& motIncomplet){
     std::vector<std::string> nouveauDico;
     std::string lettreImpossible;
