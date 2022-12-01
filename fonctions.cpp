@@ -5,6 +5,7 @@
 #include <limits>
 #include <algorithm>
 #include <string>
+#include <vector>
 #include "fonctions.h"
 
 /**
@@ -143,25 +144,36 @@ void charTrouvee(const std::string& mot, const std::string& motAtrouver,std::str
 
 std::vector<std::string> miseAjourDico(const std::vector<std::string>& listeMotRestants,const std::string& reponseJoueur,const std::string& motIncomplet){
     std::vector<std::string> nouveauDico;
+    std::string lettreImpossible;
+    std::string lettrePossible;
+    std::vector<int> pos;
+
+
+    for (int k = 0; k < motIncomplet.length() ; ++k) {
+        if (motIncomplet[k]=='-'){
+            lettreImpossible+=reponseJoueur[k];
+        } else if (std::islower(motIncomplet[k])){
+            lettrePossible+=reponseJoueur[k];
+            pos.push_back(k);
+        }
+    }
+
+
 
     for (int i = 0; i <listeMotRestants.size() ; ++i) {
-        for (int j = 0; j < motIncomplet.length(); ++j) {
-            // si maj enlever garder que celle qui sont a la meme poisition par la même chose
-            if (std::isupper(motIncomplet[j])){
-                nouveauDico.push_back(listeMotRestants[i]);
-            }
-            // si min enlever garder que celle qui contienne la laettre
-            else if (std::islower(motIncomplet[j]) and listeMotRestants[i].find_first_not_of(motIncomplet[j]) != std::string::npos){
-                nouveauDico.push_back(listeMotRestants[i]);
+        for (int j = 0; j < reponseJoueur.length(); ++j) {
+    if (listeMotRestants[i].find_first_of(lettreImpossible) == std::string::npos and
+        listeMotRestants[i].find_first_of(lettrePossible) != std::string::npos
+        ){
+        if (listeMotRestants[i][pos[k]] != motIncomplet[pos[k]]) nouveauDico.push_back(listeMotRestants[i]);
 
-            }
-            else if (listeMotRestants[i].find_first_of(reponseJoueur) == std::string::npos and motIncomplet[j]=='-'){
-                nouveauDico.push_back(listeMotRestants[i]);
-            }
+    }
+        }
 
         }
 
-    }
+
+
     sort( nouveauDico.begin(), nouveauDico.end() );
     nouveauDico.erase( unique( nouveauDico.begin(), nouveauDico.end() ), nouveauDico.end() );
     return nouveauDico;
@@ -182,3 +194,4 @@ int checkUserInput(const std::string& mQuestion, int min, int max) {
     } while (userInput < min or userInput > max);
     return userInput;
 }
+

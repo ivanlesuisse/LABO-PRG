@@ -49,7 +49,7 @@ int main() {
 
     //string motADeviner = dictionnaire[nbrAleatoire];
 
-    string motADeviner="boofy";
+    string motADeviner="dynes";
 
 
     string choixUtilisateur;
