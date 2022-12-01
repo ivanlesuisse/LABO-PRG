@@ -49,7 +49,7 @@ int main() {
 
     //string motADeviner = dictionnaire[nbrAleatoire];
 
-    string motADeviner="dynes";
+    string motADeviner="tests";
 
 
     string choixUtilisateur;
@@ -68,7 +68,8 @@ int main() {
 
             /* Mise à jour du dictionnaire quand le jeu est en anglais. */
             if (choixLangue == 1) {
-                dicoCourant = miseAjourDico(dicoCourant, choixUtilisateur, motIncomplet);
+                dicoCourant = miseAJourDico(dicoCourant, choixUtilisateur, motIncomplet);
+               // dicoCourant = miseAJourDico2(dicoCourant, motIncomplet, motIncomplet);
             }
 
             /* Vérifier si l'utilisateur a deviné le mot correctement. Si c'est le cas, il imprime le mot et félicite

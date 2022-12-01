@@ -1,7 +1,6 @@
 //
 // Created by ivbab on 17.11.2022.
 //
-
 #include <limits>
 #include <algorithm>
 #include <string>
@@ -31,7 +30,6 @@ void lireFichier(const std::string& nomFichier, std::vector<std::string>& vecteu
     }else std::cout<<"Error lors de l'ouverture du fichier"<<std::endl;
 }
 
-
 bool estDansMot(const char lettre,const std::string& mot)
 {
     for (int i = 0; i < mot.size(); i++)
@@ -43,7 +41,6 @@ bool estDansMot(const char lettre,const std::string& mot)
     }
     return false;
 }
-
 
 std::string essaiRestant(int nombreRestant,int choixLangue,int nombreMotRestants){
     std::string message="(";
@@ -134,20 +131,15 @@ void charTrouvee(const std::string& mot, const std::string& motAtrouver,std::str
             //Si la lettre est dans le mot mais pas au même emplacement, lettre lowercase à l'emplacement
             else if (estDansMot(mot[i],motAtrouver))
                     chaineActuelle[i]=mot[i];
-
         }
     }
 }
 
-
-
-
-std::vector<std::string> miseAjourDico(const std::vector<std::string>& listeMotRestants,const std::string& reponseJoueur,const std::string& motIncomplet){
+std::vector<std::string> miseAJourDico(const std::vector<std::string>& listeMotRestants,const std::string& reponseJoueur,const std::string& motIncomplet){
     std::vector<std::string> nouveauDico;
     std::string lettreImpossible;
     std::string lettrePossible;
     std::vector<int> pos;
-
 
     for (int k = 0; k < motIncomplet.length() ; ++k) {
         if (motIncomplet[k]=='-'){
@@ -162,9 +154,6 @@ std::vector<std::string> miseAjourDico(const std::vector<std::string>& listeMotR
         std::cout<<pos[i];
     }
 
-
-
-
     for (int i = 0; i <listeMotRestants.size() ; ++i) {
         for (int j = 0; j < reponseJoueur.length(); ++j) {
     if (listeMotRestants[i].find_first_of(lettreImpossible) == std::string::npos and
@@ -178,12 +167,31 @@ std::vector<std::string> miseAjourDico(const std::vector<std::string>& listeMotR
 
         }
 
-
-
     sort( nouveauDico.begin(), nouveauDico.end() );
     nouveauDico.erase( unique( nouveauDico.begin(), nouveauDico.end() ), nouveauDico.end() );
     return nouveauDico;
 }
+std::vector<std::string> miseAJourDico2(const std::vector<std::string>& listeMotRestants,const std::string& stringIntermediaire,const std::string& motIncomplet){
+    std::vector<std::string> nouveauDico2;
+
+    //enlève les mots qui n'ont pas les lettres de la réponse joueur
+    // pourquoi ca marche pas ?
+
+    for (int i = 0; i <listeMotRestants.size() ; ++i) {
+        //stringIntermediaire contient les lettres valides de la réponse joueur ("--Ab-" )
+        for(int j = 0; j < stringIntermediaire.length(); ++j){
+            if (stringIntermediaire[j] != '-') {
+
+                if (toupper(listeMotRestants[i][j]) == stringIntermediaire[j]) nouveauDico2.push_back(listeMotRestants[i]); //si la lettre est bonne, on ajoute le mot au nouveau dico
+                //si la lettre est mauvaise, on passe au mot suivant
+                //find_first_of :  return : le position du prmier caractère trouvé
+                //si rien est trouvé, la fonction retourne string::npos.
+            }
+    }
+    }
+    return nouveauDico2;
+}
+
 
 int checkUserInput(const std::string& mQuestion, int min, int max) {
 
@@ -200,4 +208,3 @@ int checkUserInput(const std::string& mQuestion, int min, int max) {
     } while (userInput < min or userInput > max);
     return userInput;
 }
-

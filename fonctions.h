@@ -25,7 +25,9 @@ void afficheListe(std::vector<std::string>dicoCourant);
 
 void charTrouvee(const std::string& mot, const std::string& motAtrouver,std::string& chaineActuelle);
 
-std::vector<std::string> miseAjourDico(const std::vector<std::string>& listeMotRestants,const std::string& reponseJoueur,const std::string& motIncomplet);
+std::vector<std::string> miseAJourDico(const std::vector<std::string>& listeMotRestants,const std::string& reponseJoueur,const std::string& motIncomplet);
+
+std::vector<std::string> miseAJourDico2(const std::vector<std::string>& listeMotRestants,const std::string& reponseJoueur,const std::string& motIncomplet);
 
 int checkUserInput(const std::string& mQuestion, int min, int max);
 #endif //WORDLE_FONCTIONS_H
